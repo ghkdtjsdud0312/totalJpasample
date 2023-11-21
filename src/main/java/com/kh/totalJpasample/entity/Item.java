@@ -27,11 +27,11 @@ public class Item {
     private int price; // 가격
 
     @Column(nullable = false)
-    private String stockNumber; // 재고 수량
+    private int stockNumber; // 재고 수량
 
     @Lob // 긴 데이터형을 만들 때 사용(영화 자막에 사용)
     @Column(nullable = false)
-    private int itemDetail; // 상품 상세 설명
+    private String itemDetail; // 상품 상세 설명
 
     // EnumType.STRING : ENUM으로 정의된 값을 문자열로 DB에 저장
     @Enumerated(EnumType.STRING) // 실제 디비에는 sell이라고 저장됨 /ordinal 일련번호 순서대로 저장
