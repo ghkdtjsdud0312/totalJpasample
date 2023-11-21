@@ -32,7 +32,7 @@ public class MemberController {
         return ResponseEntity.ok(list);
     }
     // 회원 상태 조회
-    @GetMapping("/detail/{email}") // pathVariabel
+    @GetMapping("/detail/{email}")
      public ResponseEntity<MemberDto> memberDetail(@PathVariable String email) {
         MemberDto memberDto = memberService.getMemberDetail(email);
         return ResponseEntity.ok(memberDto);
