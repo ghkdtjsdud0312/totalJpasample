@@ -31,10 +31,25 @@ public class MemberController {
         List<MemberDto> list = memberService.getMemberList();
         return ResponseEntity.ok(list);
     }
-    // 회원 상태 조회
+    // 회원 상세 조회
     @GetMapping("/detail/{email}")
      public ResponseEntity<MemberDto> memberDetail(@PathVariable String email) {
         MemberDto memberDto = memberService.getMemberDetail(email);
         return ResponseEntity.ok(memberDto);
     }
+    // 페이지 네이션 조회
+        @GetMapping("/list/page")
+        public ResponseEntity<List<MemberDto>> memberList(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "10")int size) {
+            List<MemberDto> list = memberService.getMemberList(page,size);
+            return ResponseEntity.ok(list);
+        }
+
+    // 총 페이지 수 조회
+        @GetMapping("/list/page-cnt") // postman 하기
+        public ResponseEntity<Integer> memberPageCount(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "5") int size) {
+            int pageCnt = memberService.getMemberPage(page,size);
+            return ResponseEntity.ok(pageCnt);
+        }
 }

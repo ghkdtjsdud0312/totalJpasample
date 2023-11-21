@@ -4,6 +4,8 @@ import com.kh.totalJpasample.dto.MemberDto;
 import com.kh.totalJpasample.entity.Member;
 import com.kh.totalJpasample.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,6 +37,21 @@ public class MemberService {
             memberDtos.add(convertEntityToDto(member));
         }
         return memberDtos;
+    }
+    // 페이지네이션 조회
+    public List<MemberDto> getMemberList(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        List<MemberDto> memberDtos = new ArrayList<>();
+        List<Member> members = memberRepository.findAll(pageable).getContent();
+        for(Member member : members) {
+            memberDtos.add(convertEntityToDto(member));
+        }
+        return memberDtos;
+    }
+    // 페이지 수 조회
+    public int getMemberPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return memberRepository.findAll(pageable).getTotalPages();
     }
 
     // 회원 상세 조회
