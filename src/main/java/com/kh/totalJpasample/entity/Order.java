@@ -29,7 +29,4 @@ public class Order {
     // 연관관계의 주인이 아님을 표시 함
     @OneToMany(mappedBy = "order") // mappedBy는 주인이 아니라는 뜻, oneToMany는 꼭 써줘야함
     private List<OrderItem> orderItemList = new ArrayList<>(); // 만들어진 정보만 불러옴
-
-
-
 }
