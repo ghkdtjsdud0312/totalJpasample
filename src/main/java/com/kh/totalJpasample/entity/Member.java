@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 public class Member {
     @Id // primary키 역할
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "member_id") //cart에 연결 조인 , 키가 됨
     private Long id;
+    private String userId;
+
     @Column(nullable = false) // null을 허용하지 않음
     private String name;
     private String password;
