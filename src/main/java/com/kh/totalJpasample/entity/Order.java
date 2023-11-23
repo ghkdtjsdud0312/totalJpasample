@@ -1,6 +1,8 @@
 package com.kh.totalJpasample.entity;
 
 import com.kh.totalJpasample.constant.OrderStatus;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders") //order가 예약어로 걸려서 orders
+@Getter
+@Setter
 public class Order {
     @Id
     @GeneratedValue // 기본 생성 전략은 auto
@@ -27,6 +31,6 @@ public class Order {
     private LocalDateTime updateTime;
 
     // 연관관계의 주인이 아님을 표시 함
-    @OneToMany(mappedBy = "order") // mappedBy는 주인이 아니라는 뜻, oneToMany는 꼭 써줘야함
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true) // mappedBy는 주인이 아니라는 뜻, oneToMany는 꼭 써줘야함
     private List<OrderItem> orderItemList = new ArrayList<>(); // 만들어진 정보만 불러옴
 }
